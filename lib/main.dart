@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
               ),
 
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -82,6 +82,39 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.redAccent,
                     size: 50,
                   ),
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text("font_awesome_flutter: 9.1.0"),
+                  ),
+
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                 
+                  Icon(FontAwesomeIcons.uncharted,color: Colors.amber, size: 50,),
+
+                  FaIcon(FontAwesomeIcons.airbnb, color: Colors.amber, size: 50,),
+                  FaIcon(FontAwesomeIcons.facebook, color: Colors.amber, size: 50,),
+                  FaIcon(FontAwesomeIcons.whatsappSquare, color: Colors.amber, size: 50,),
+
+
+                  // onPressed: () { print("Pressed"); }
+
+                      // IconButton(
+                      // icon: FaIcon(FontAwesomeIcons.search),
+                      // onPressed: () {
+                      //   },
+                      // ),
+
+
                 ],
               ),
 
