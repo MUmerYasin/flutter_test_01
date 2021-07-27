@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share/share.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,6 +42,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,20 +112,59 @@ class _MyHomePageState extends State<MyHomePage> {
                   Icon(FontAwesomeIcons.uncharted,color: Colors.amber, size: 50,),
 
                   FaIcon(FontAwesomeIcons.airbnb, color: Colors.amber, size: 50,),
-                  FaIcon(FontAwesomeIcons.facebook, color: Colors.amber, size: 50,),
-                  FaIcon(FontAwesomeIcons.whatsappSquare, color: Colors.amber, size: 50,),
-
-
-                  // onPressed: () { print("Pressed"); }
-
-                      // IconButton(
-                      // icon: FaIcon(FontAwesomeIcons.search),
-                      // onPressed: () {
-                      //   },
-                      // ),
-
+                  FaIcon(FontAwesomeIcons.facebook, color: Colors.blue[900], size: 50,),
+                  FaIcon(FontAwesomeIcons.whatsappSquare, color: Colors.green[900], size: 50,),
 
                 ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text("share: 2.0.4")
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: TextFormField(
+                      controller: myController,
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Enter Your Name'
+                      ),
+                    ),
+                    ),
+                    Expanded(child: OutlinedButton(
+
+                      style: TextButton.styleFrom(
+                        primary: Colors.blue,
+
+                      ),
+                      onPressed: () {
+                        String myContValue = myController.text;
+                        if(myContValue.isEmpty){
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                // Retrieve the text the that user has entered by using the
+                                // TextEditingController.
+                                content: Text("Empty Field"),
+                              );
+                            },
+                          );
+                        }
+                        else{
+                          Share.share(myContValue);
+                        }
+
+                      },
+                      child: Text('Share'),
+                    ))
+                  ],
+
+                  // Share.share('check out my website https://example.com', subject: 'Look what I made!');
+
               ),
 
             ],
