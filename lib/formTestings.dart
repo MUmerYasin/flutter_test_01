@@ -5,6 +5,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
+import 'package:share/share.dart';
 
 // void main() => runApp2(const MyApp2());
 
@@ -237,7 +238,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         return 'Please enter some text';
                       }
                       else if(!isAlphanumeric(value)){
-                        return "Invalid Phone Number";
+                        return "Invalid Address";
                       }
 
                     },
@@ -273,13 +274,38 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     onPressed: () {
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
 
+                      /// Notification bar on screen
+                      // if (_formKey.currentState!.validate()) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     const SnackBar(content: Text('Processing Data')),
+                      //
+                      //   );
+                      //   // Process data.
+                      // }
+
+                      String myContValue = " >First Name : " + fNameController.text +
+                          " >Last Name : " +  lNameController.text +
+                          " >Email : " +  emailController.text +
+                          " >Phone Number: " +  phoneController.text +
+                          " >address: " +  addressController.text;
+                      if (myContValue.isEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              // Retrieve the text the that user has entered by using the
+                              // TextEditingController.
+                              content: Text("Error Empty Fields"),
+                            );
+                          },
                         );
-                        // Process data.
+                      } else {
+                        Share.share(myContValue);
                       }
+
+
+
                     },
                     child: const Text('Submit'),
                   ),
