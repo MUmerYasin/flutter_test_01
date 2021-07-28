@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_test_01/formTestings.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share/share.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp2());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -42,7 +43,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final myController = TextEditingController();
 
   @override
@@ -54,36 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-
             mainAxisAlignment: MainAxisAlignment.start,
-
             children: <Widget>[
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Flutter Spinkit"),
-
-
-                  ],
-              ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                   SpinKitCircle(
-                     color: Colors.pink,
-                   ),
+                  Text("Flutter Spinkit"),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SpinKitCircle(
+                    color: Colors.pink,
+                  ),
                   SpinKitChasingDots(
                     color: Colors.pink,
                     size: 40,
@@ -94,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -102,76 +93,85 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(15.0),
                     child: Text("font_awesome_flutter: 9.1.0"),
                   ),
-
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                 
-                  Icon(FontAwesomeIcons.uncharted,color: Colors.amber, size: 50,),
-
-                  FaIcon(FontAwesomeIcons.airbnb, color: Colors.amber, size: 50,),
-                  FaIcon(FontAwesomeIcons.facebook, color: Colors.blue[900], size: 50,),
-                  FaIcon(FontAwesomeIcons.whatsappSquare, color: Colors.green[900], size: 50,),
-
+                  Icon(
+                    FontAwesomeIcons.uncharted,
+                    color: Colors.amber,
+                    size: 50,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.airbnb,
+                    color: Colors.amber,
+                    size: 50,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.facebook,
+                    color: Colors.blue[900],
+                    size: 50,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.whatsappSquare,
+                    color: Colors.green[900],
+                    size: 50,
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("share: 2.0.4")
-                ],
+                children: [Text("share: 2.0.4")],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: TextFormField(
+                children: [
+                  Expanded(
+                    child: TextFormField(
                       controller: myController,
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                           border: UnderlineInputBorder(),
-                          labelText: 'Enter Your Name'
-                      ),
+                          labelText: 'Enter Your Name'),
                     ),
+                  ),
+                  Expanded(
+                      child: OutlinedButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.blue,
                     ),
-                    Expanded(child: OutlinedButton(
+                    onPressed: () {
+                      String myContValue = myController.text;
+                      if (myContValue.isEmpty) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              // Retrieve the text the that user has entered by using the
+                              // TextEditingController.
+                              content: Text("Empty Field"),
+                            );
+                          },
+                        );
+                      } else {
+                        Share.share(myContValue);
+                      }
+                    },
+                    child: Text('Share'),
+                  ))
+                ],
 
-                      style: TextButton.styleFrom(
-                        primary: Colors.blue,
-
-                      ),
-                      onPressed: () {
-                        String myContValue = myController.text;
-                        if(myContValue.isEmpty){
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                // Retrieve the text the that user has entered by using the
-                                // TextEditingController.
-                                content: Text("Empty Field"),
-                              );
-                            },
-                          );
-                        }
-                        else{
-                          Share.share(myContValue);
-                        }
-
-                      },
-                      child: Text('Share'),
-                    ))
-                  ],
-
-                  // Share.share('check out my website https://example.com', subject: 'Look what I made!');
-
+                // Share.share('check out my website https://example.com', subject: 'Look what I made!');
               ),
-
+              Row(
+                children: [],
+              ),
             ],
           ),
         ),
       ),
-     // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
