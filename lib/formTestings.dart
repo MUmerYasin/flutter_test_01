@@ -48,6 +48,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final addressController = TextEditingController();
 
   SingingCharacter? _character = SingingCharacter.Under18;
+  bool isChecked = false;
 
 
   @override
@@ -89,8 +90,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 8.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
                     child: Text(
                       'Login Form',
                       style: TextStyle(
@@ -109,8 +109,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 /// first name
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 4.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 16.0, 4.0, 6.0),
                     child: TextFormField(
                       controller: fNameController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -140,8 +139,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 /// last name
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 4.0),
+                    padding: const EdgeInsets.fromLTRB(4.0, 16.0, 8.0, 6.0),
                     child: TextFormField(
                       controller: lNameController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -250,6 +248,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             //   ],
             // ),
 
+
+
             /// Radio Button
 
             Row(
@@ -286,6 +286,38 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ],
             ),
 
+            /// Checkbox
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Color getColor(Set<MaterialState> states) {
+                // const Set<MaterialState> interactiveStates = <MaterialState>{
+                // MaterialState.pressed,
+                // MaterialState.hovered,
+                // MaterialState.focused,
+                // };
+                // if (states.any(interactiveStates.contains)) {
+                // return Colors.blue;
+                // }
+                // return Colors.red;
+                // }
+
+                Checkbox(
+                  checkColor: Colors.white,
+                  // fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: isChecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isChecked = value!;
+                    });
+                  },
+                ),
+
+                Expanded(child:
+                Text("  Are you agree on terms and conditions"),
+                    ),
+              ],
+            ),
 
             // Row(
             //   children: <Widget>[
